@@ -1,25 +1,47 @@
 # Smart Contract Function Documentation
 
-## createPolicy()
-- Only owner (insurer) can call
-- Inputs: premium, coverageAmount, duration
-- Description: Creates a new insurance policy
+## issuePolicy(address _policyholder, uint _premium, uint _coverageAmount, uint _months, uint _years)
+- Called by insurer
+- Issues a policy with duration converted to seconds
+- Status set to `Inactive`
 
-## payPremium(policyId)
+## payPremium(uint _policyId)
 - Called by policyholder
-- Sends Ether equal to policy premium
-- Marks policy as Active
+- Requires exact premium amount
+- Activates policy & sets startTime
 
-## submitClaim(policyId)
+## cancelPolicy(uint _policyId)
 - Called by policyholder
-- Creates a new claim for the active policy
+- Cancels if unpaid and still inactive
 
-## approveClaim(claimId)
-- Only owner can approve
-- Approves claim and transfers coverage amount
+## lapseUnpaidPolicy(uint _policyId)
+- Called by anyone
+- Lapses inactive policy after 7 days
 
-## getPolicy(policyId)
-- Returns policy details
+## submitClaim(uint _policyId, uint _claimAmount, string _reason)
+- Called by policyholder
+- Policy must be active and not expired
 
-## getClaim(claimId)
-- Returns claim details
+## approveClaim(uint _claimId)
+- Called by insurer
+- Approves valid claims within coverage and reason-based limits
+
+## rejectClaim(uint _claimId, string _reason)
+- Called by insurer
+- Marks claim as `Rejected`
+
+## payClaim(uint _claimId)
+- Called by insurer
+- Transfers ETH to claimant and marks `Paid`
+
+## checkPolicyExpiry(uint _policyId)
+- Marks policy as `Expired` if duration passed
+
+## getUserPolicies(address)
+- Returns all policy IDs for a user
+
+## getPolicyClaims(policyId)
+- Returns all claims for a policy
+
+## getAllIssuedAddresses() / getAllActiveAddresses() / getAllCancelledAddresses()
+- Returns addresses by policy status category
