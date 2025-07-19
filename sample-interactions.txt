@@ -1,15 +1,17 @@
-# Sample Interaction Inputs
+# Sample Interactions
 
-createPolicy
-Inputs: premium = 1 ether, coverage = 5 ether, duration = 90 days
+1. Issue Policy (by Insurer)
+   - Input: user address, 1 ETH premium, 5 ETH coverage, 3 months, 0 years
 
-payPremium
-Input: policyId = 1
-Send: 1 ether
+2. Pay Premium (by Policyholder)
+   - Input: policyId = 1
+   - Value: 1 ETH
 
-submitClaim
-Input: policyId = 1
+3. Submit Claim (by Policyholder)
+   - Input: policyId = 1, amount = 1 ETH, reason = "accident"
 
-approveClaim
-Input: claimId = 1
-(called by owner)
+4. Approve Claim (by Insurer)
+   - Input: claimId = 1
+
+5. Pay Claim (by Insurer)
+   - Input: claimId = 1
