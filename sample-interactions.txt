@@ -1,0 +1,15 @@
+# Sample Interaction Inputs
+
+createPolicy
+Inputs: premium = 1 ether, coverage = 5 ether, duration = 90 days
+
+payPremium
+Input: policyId = 1
+Send: 1 ether
+
+submitClaim
+Input: policyId = 1
+
+approveClaim
+Input: claimId = 1
+(called by owner)
